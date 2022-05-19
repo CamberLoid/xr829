@@ -15,6 +15,7 @@
 #include <linux/list.h>
 #include <linux/list_sort.h>
 #include <linux/timer.h>
+#include <linux/time64.h>
 
 #include "vendor.h"
 #include "../umac/ieee80211_i.h"
@@ -313,7 +314,7 @@ static void keep_alive_send(struct ieee80211_local *local, struct net_device *de
 
 static int
 keep_alive_cmp(void *priv,
-	struct list_head *a, struct list_head *b)
+	const struct list_head *a, const struct list_head *b)
 {
 	struct keepalivenode *ap = container_of(a, struct keepalivenode, list);
 	struct keepalivenode *bp = container_of(b, struct keepalivenode, list);
@@ -615,16 +616,16 @@ void xradio_vendor_init(struct wiphy *wiphy)
 
 void xr_do_gettimeofday(struct timeval *tv)
 {
-	struct timespec now;
+	struct timespec64 now;
 
-	getnstimeofday(&now);
+	getnstimeofday64(&now);
 	tv->tv_sec = now.tv_sec;
 	tv->tv_usec = now.tv_nsec/1000;
 }
 
-void xr_get_monotonic_boottime(struct timespec *ts)
+void xr_get_monotonic_boottime(struct timespec64 *ts)
 {
-	*ts = ktime_to_timespec(ktime_get_boottime());
+	*ts = ktime_to_timespec64(ktime_get_boottime());
 }
 
 
