@@ -13,6 +13,7 @@
 #include <linux/vmalloc.h>
 #include <linux/sched.h>
 #include <linux/firmware.h>
+#include <linux/time.h>
 
 #include "xradio.h"
 #include "fwio.h"
