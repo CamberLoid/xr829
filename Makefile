@@ -47,6 +47,7 @@ DRV_FLAGS += $(call boolen_flag,CONFIG_XRADIO_DEBUGFS,y)
 ccflags-y += $(DRV_FLAGS)
 
 NOSTDINC_FLAGS := -I$(srctree)/$(src)/include/
+NOSTDINC_FLAGS += -I$(src)/include/
 
 ldflags-y += --strip-debug
 
