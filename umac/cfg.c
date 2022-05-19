@@ -16,6 +16,7 @@
 #include <linux/fips.h>
 #include <linux/if_ether.h>
 #include <net/cfg80211.h>
+#include <linux/time64.h>
 #include "ieee80211_i.h"
 #include "driver-ops.h"
 #include "cfg.h"
@@ -390,7 +391,7 @@ static void rate_idx_to_bitrate(struct rate_info *rate, struct sta_info *sta, in
 static void sta_set_sinfo(struct sta_info *sta, struct station_info *sinfo)
 {
 	struct ieee80211_sub_if_data *sdata = sta->sdata;
-	struct timespec uptime;
+	struct timespec64 uptime;
 
 	sinfo->generation = sdata->local->sta_generation;
 
