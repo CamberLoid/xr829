@@ -20,6 +20,7 @@
 #include <linux/if_ether.h>
 #include <linux/ieee80211.h>
 #include <linux/net.h>
+#include <uapi/linux/ethtool.h>
 #include <net/regulatory.h>
 
 /**
