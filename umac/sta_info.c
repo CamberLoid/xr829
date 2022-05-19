@@ -16,6 +16,7 @@
 #include <linux/if_arp.h>
 #include <linux/timer.h>
 #include <linux/rtnetlink.h>
+#include <linux/time64.h>
 
 #include <net/mac80211.h>
 #include "ieee80211_i.h"
@@ -310,7 +311,7 @@ struct sta_info *xrmac_sta_info_alloc(struct ieee80211_sub_if_data *sdata,
 {
 	struct ieee80211_local *local = sdata->local;
 	struct sta_info *sta;
-	struct timespec uptime;
+	struct timespec64 uptime;
 	int i;
 
 	sta = kzalloc(sizeof(*sta) + local->hw.sta_data_size, gfp);
