@@ -1,6 +1,11 @@
 CONFIG_XR829_WLAN = m
 
 ##################### XRADIO Wi-Fi Config #######################
+
+# DEBUGFS is not available since kernel behaviour fs/debugfs/file.c is changed
+# which will not return any value (void).
+# CONFIG_{XRADIO,XRMAC}_DEBUGFS will be set to n
+
 CONFIG_XRMAC_RC_DEFAULT = "minstrel_ht"
 CONFIG_XRMAC_RC_PID = n
 CONFIG_XRMAC_RC_MINSTREL = y
@@ -15,7 +20,7 @@ CONFIG_XRADIO_NOMAL_SUSPEND_FORCE = n
 CONFIG_XRADIO_DEBUG = y
 CONFIG_XRADIO_ETF = y
 CONFIG_XRADIO_DUMP_ON_ERROR = n
-CONFIG_XRADIO_DEBUGFS = y
+CONFIG_XRADIO_DEBUGFS = n
 CONFIG_XRADIO_VERBOSE_DEBUG = y
 CONFIG_XRADIO_DRIVER_API_TRACER = y
 CONFIG_MODULE_NAME = xr829
@@ -212,5 +217,7 @@ ccflags-y += -DDEBUG_P2P_SETTING_CRASH
 
 EXTRA_CFLAGS += -Wno-error=date-time
 EXTRA_CFLAGS +=-Wno-date-time
+
+ccflags-y += -Wno-implicit-function-declaration
 
 clean-files += Module.symvers Module.markers modules modules.order
