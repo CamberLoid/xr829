@@ -210,18 +210,6 @@ struct xr_pm_qos_object network_throughput_pm_qos = {
 };
 
 static BLOCKING_NOTIFIER_HEAD(memory_bandwidth_notifier);
-static struct pm_qos_constraints memory_bw_constraints = {
-	.list = PLIST_HEAD_INIT(memory_bw_constraints.list),
-	.target_value = PM_QOS_MEMORY_BANDWIDTH_DEFAULT_VALUE,
-	.default_value = PM_QOS_MEMORY_BANDWIDTH_DEFAULT_VALUE,
-	.no_constraint_value = PM_QOS_MEMORY_BANDWIDTH_DEFAULT_VALUE,
-	.type = PM_QOS_SUM,
-	.notifiers = &memory_bandwidth_notifier,
-};
-static struct xr_pm_qos_object memory_bandwidth_pm_qos = {
-	.constraints = &memory_bw_constraints,
-	.name = "memory_bandwidth",
-};
 
 static struct xr_pm_qos_object null_pm_qos;
 static struct xr_pm_qos_object cpu_dma_pm_qos;
@@ -231,7 +219,6 @@ static struct xr_pm_qos_object *xr_pm_qos_array[] = {
 	&cpu_dma_pm_qos,
 	&network_lat_pm_qos,
 	&network_throughput_pm_qos,
-	&memory_bandwidth_pm_qos,
 };
 
 int xr_pm_qos_request(int pm_qos_class)
