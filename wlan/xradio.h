@@ -19,6 +19,7 @@
 #include <linux/atomic.h>
 #include <net/mac80211.h>
 #include <asm/bitops.h>
+#include <linux/time64.h>
 
 /*Macroses for Driver parameters.*/
 #define XRWL_MAX_QUEUE_SZ    (128)
@@ -74,12 +75,12 @@
 #endif
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0))
-#include <uapi/linux/time.h>
+// #include <uapi/linux/time.h>
 #include <linux/timekeeping.h>
-#include <linux/timekeeping32.h>
+#include "timeval.h"
 
 void xr_do_gettimeofday(struct timeval *tv);
-void xr_get_monotonic_boottime(struct timespec *ts);
+void xr_get_monotonic_boottime(struct timespec64 *ts);
 
 #endif /* (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 4, 0)) */
 
